@@ -175,7 +175,7 @@ element_dict = create_element_dict(element_names, half_lives, initial_amounts)
 filtered_dict = filter_elements(element_dict)
 # Tyto operace byly provedeny pro zjednodušení a správnou funkčnost programu. Všechny následující funkce a operace jsou určeny pro filtrováný slovník prvků.
 
-
+print(filtered_dict)
 
 # Modul 4: Výpočet dat metodou Euler
 
@@ -343,7 +343,7 @@ def create_combined_plot(ax, times, current_amounts, colors, element_names):
     colors (list): Seznam barev pro každý prvek.
     element_names (list): Seznam názvů prvků.
     """
-    y_dict = {element: (current_amounts[element], color) for element, color in zip(element_names, colors[:len(element_names)])}     # Vytvoříme slovník dat pro každý prvek
+    y_dict = {element: (current_amounts[element], color) for element, color in zip(filtered_dict, colors[:len(element_names)])}     # Vytvoříme slovník dat pro každý prvek
     plot_combined_graph(ax, times, y_dict, 'Změna počtu atomů všech prvků')                                            # Vykreslíme kombinovaný graf pro všechny prvky
 
 
@@ -365,7 +365,7 @@ def create_plot_functions(times, current_amounts, element_names, colors):
     """
     plot_functions = []  # Vytvoříme prázdný seznam pro uchování funkcí
     
-    for element, color in zip(element_names, colors[:len(element_names)]):      # Vytvoříme funkci pro každý prvek a přidáme ji do seznamu funkcí
+    for element, color in zip(filtered_dict, colors[:len(element_names)]):      # Vytvoříme funkci pro každý prvek a přidáme ji do seznamu funkcí
         def single_element_plot(ax=ax, times=times, current_amounts=current_amounts, element=element, color=color):
             create_single_element_plot(ax, times, current_amounts, element, color)
         plot_functions.append(single_element_plot)                              # Přidáme funkci zobrazení jednoho prvku do seznamu
